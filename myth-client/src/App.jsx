@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import TestPage from "./pages/TestPage.jsx";
+import ResultPage from './pages/ResultPage';
 
 function App() {
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        // 스프링 부트 서버(8080)로 요청 보내기
-        fetch('http://localhost:8080/api/test')
-            .then(response => response.text())
-            .then(data => setMessage(data))
-            .catch(error => console.error('Error:', error));
-    }, []);
-
     return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h1>🏛️ 신화 성격 테스트</h1>
-            <p>서버 응답 메시지: {message}</p>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                {/* 주소가 / 일 때 Home 컴포넌트를 보여줘라 */}
+                <Route path="/" element={<Home />} />
+                <Route path="/test" element={<TestPage />} />
+                <Route path="/result" element={<ResultPage />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
