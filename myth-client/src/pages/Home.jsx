@@ -6,13 +6,7 @@ const Home = () => {
 
     return (
         <div style={styles.container}>
-            <h1 style={styles.title}>🏛️ 신화 성격 테스트</h1>
-            <p style={styles.desc}>
-                고대 그리스 신화 속에서<br />
-                나는 어떤 신과 닮았을까요?
-            </p>
-            {/* 버튼을 누르면 /test 페이지로 이동! */}
-            <button style={styles.button} onClick={() => navigate('/test')}>
+            <button className="start-btn" onClick={() => navigate('/test')}>
                 테스트 시작하기
             </button>
         </div>
@@ -23,26 +17,6 @@ const Home = () => {
 const styles = {
     container: {
         textAlign: 'center',
-        marginTop: '100px',
-        fontFamily: 'sans-serif',
-    },
-    title: {
-        fontSize: '2.5rem',
-        color: '#333',
-    },
-    desc: {
-        fontSize: '1.2rem',
-        color: '#666',
-        marginBottom: '30px',
-    },
-    button: {
-        padding: '15px 30px',
-        fontSize: '1.2rem',
-        cursor: 'pointer',
-        backgroundColor: '#6200ea',
-        color: 'white',
-        border: 'none',
-        borderRadius: '8px',
     },
 };
 
