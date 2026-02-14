@@ -12,55 +12,75 @@
   font-style: normal;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html, body{
+  margin: 0px;
 }
 
-body {
-  margin: 0;
+/* 1. 전체 검은 배경 (영화관처럼) */
+.home-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* 빈 공간은 검은색으로 */
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 스크롤바 방지 */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* 2. 게임 화면 비율 고정 상자 (가장 중요 ⭐) */
+.game-container {
+  position: relative; /* 자식들(버튼)의 기준점이 됨 */
+
+  /* 배경 이미지의 원본 비율을 적어주세요! (예: 9대 16) */
+  aspect-ratio: 2 / 3;
+
+  /* 화면에 꽉 차되, 비율은 깨지지 않게 */
+  width: auto;
+  height: 100vh; /* 세로 기준 꽉 차게 */
+  max-width: 100vw; /* 가로가 넘치면 가로에 맞춤 */
 }
 
-button {
-  cursor: pointer;
-  font-family: 'HeirofLightBold', sans-serif;
-  background-image: url('./assets/image/button.png'); /* 파일명 꼭 확인! */
-  background-size : contain;
-  background-repeat : no-repeat;
-  background-position: center;
-  background-color: transparent !important; /* 버튼 원래 배경색을 투명하게! */
-  border: none !important; /* 버튼 원래 테두리를 없애기! */
-}
-button:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1); /* 살짝 밝게 */
+/* 3. 배경 이미지 스타일 */
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 상자 안에 꽉 차게 */
+  display: block; /* 이미지 하단 미세한 공백 제거 */
 }
 
-/* 눌렀을 때 효과 */
-button:active {
-  transform: scale(0.95);
-}
+/* 4. 시작 버튼 위치 고정 (절대 좌표) */
+.start-btn {
+  position: absolute; /* 부모(.game-container) 기준으로 둥둥 띄움 */
 
-.start-btn{
-  width: 280px;
-  height: 56px;
-  font-size: 1rem;
+  /* 👇 여기가 버튼 위치 조절 핵심! 👇 */
+  bottom: 12%; /* 바닥에서 12% 높이에 위치 (계단 위치에 맞춰 숫자 조절하세요) */
+  left: 50%;   /* 가로 중앙 */
+  transform: translateX(-50%); /* 정확한 중앙 정렬을 위해 */
+
+  width: 60%; /* 배경 가로 폭의 60%만큼 차지해라 */
+  height: auto; /* 높이는 알아서 정해라 (비율에 맡김) */
+  aspect-ratio: 3 / 1;
+  /* 버튼 꾸미기 (기존 스타일 유지) */
   background-image: url('./assets/image/blue-btn.png');
-  background-size: 100% !important;
-  color: white;
-  padding-bottom: 10px;
-  margin-top: 40%;
+  background-size: 100% 100%;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-family: 'HeirofLightBold', sans-serif;
+  font-size: clamp(8px, 4vw, 60px);
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10; /* 이미지보다 위에 오도록 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5em;
+}
+
+/* 반응형: 모바일보다 더 길쭉한 화면일 때 */
+@media (max-aspect-ratio: 2/3) {
+  .game-container {
+    width: 100vw;
+    height: auto;
+  }
 }
