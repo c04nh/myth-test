@@ -59,7 +59,7 @@ html, body{
 
   width: 60%; /* 배경 가로 폭의 60%만큼 차지해라 */
   height: auto; /* 높이는 알아서 정해라 (비율에 맡김) */
-  aspect-ratio: 3 / 1;
+  aspect-ratio: 5 / 1;
   /* 버튼 꾸미기 (기존 스타일 유지) */
   background-image: url('./assets/image/blue-btn.png');
   background-size: 100% 100%;
@@ -74,7 +74,149 @@ html, body{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.4em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+.start-btn:hover {
+  /* 크기를 원래보다 1.05배 (5%) 키워라 */
+  transform: translateX(-50%) scale(1.02) !important;
+
+  /* 밝기를 원래보다 1.1배 (10%) 밝게 해라 */
+  filter: brightness(1.2) !important;
+
+  /* (선택사항) 마우스 커서를 손가락 모양으로 확실하게 변경 */
+  cursor: pointer !important;
+}
+
+/* 진행바 배경 (이미지로 교체) */
+
+.progress-container {
+  position: absolute;
+  top: 5%; /* 위에서 5% 지점 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 89%; /* 화면 너비의 80% */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  aspect-ratio: 10 / 1;
+
+  /* 👇 배경 이미지 설정 */
+  background-image: url("./assets/image/progress-bar.png");
+  background-size: 100% 100%; /* 이미지를 꽉 채우기 */
+  background-repeat: no-repeat;
+  background-color: transparent !important; /* 기존 회색 배경 제거 */
+  border: none !important; /* 기존 테두리 제거 (이미지에 테두리가 있을 테니) */
+
+  /* 텍스트 중앙 정렬을 위한 설정 */
+  position: relative; /* 자식요소(텍스트)의 기준점 */
+  display: flex;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
+
+}
+
+/* 진행 텍스트 (1/20) */
+.progress-text {
+  position: relative; /* z-index를 쓰기 위해 */
+  z-index: 5; /* 파란색 막대(z-index:1)보다 위에 올라오도록 */
+
+  color: #fff; /* 글자색 (배경에 맞춰 변경) */
+  font-family: 'HeirofLightBold', sans-serif;
+  font-weight: bold;
+  font-size: 1.0rem;
+}
+
+
+/* 2. 질문 상자 (양피지 느낌) */
+.question-box {
+  position: absolute;
+  top: 18%; /* 위에서 18% 지점 (진행바 아래) */
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 80%; /* 너비 85% */
+  aspect-ratio: 3 / 1;
+
+  /* 배경 이미지 (없으면 베이지색) */
+  background-image: url('./assets/image/question-box.png');
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%; /* 글자가 테두리에 닿지 않게 안쪽 여백 */
+  z-index: 10;
+}
+
+.question-text {
+  font-family: 'HeirofLightBold', sans-serif;
+  font-size: clamp(16px, 4vw, 24px); /* 화면 크기에 따라 글자 크기 조절 */
+  font-weight: bold;
+  color: #3e2723; /* 진한 갈색 글씨 */
+  text-align: center;
+  line-height: 1.5;
+  word-break: keep-all; /* 단어 단위 줄바꿈 */
+  margin: 0;
+}
+
+
+/* 3. 답변 버튼 영역 및 스타일 */
+.answers-area {
+  position: absolute;
+  bottom: 10%; /* 바닥에서 10% 띄움 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  flex-direction: column; /* 위아래로 배치 */
+  gap: 15px; /* 버튼 사이 간격 */
+  z-index: 10;
+}
+
+.answer-btn {
+  position: relative; /* answers-area 안에서 배치 */
+  width: 100%; /* 부모(answers-area)의 100% */
+  aspect-ratio: 7 / 2; /* 가로 5 : 세로 1 비율 (길쭉하게) */
+
+  /* 배경 이미지 (없으면 파란색) */
+  background-image: url('./assets/image/select-box.png');
+  background-size: 100% 100%;
+
+  color: white;
+  font-family: 'HeirofLightBold', sans-serif;
+  font-size: clamp(12px, 3.5vw, 18px); /* 글자 크기 반응형 */
+  padding: 1em 1em 0;
+
+  background-color: transparent !important;
+  border: none !important; /* 혹시 모를 테두리 제거 */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  /* 긴 글자 처리 */
+  white-space: normal; /* 답변은 길면 줄바꿈 허용 */
+  word-break: keep-all;
+  line-height: 1.3;
+  text-align: center;
+
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 마우스 올렸을 때 효과 */
+.answer-btn:hover {
+  transform: scale(1.02); /* 살짝 커짐 */
+  filter: brightness(1.2); /* 밝게 */
 }
 
 /* 반응형: 모바일보다 더 길쭉한 화면일 때 */
@@ -83,15 +225,4 @@ html, body{
     width: 100vw;
     height: auto;
   }
-}
-
-.start-btn:hover {
-  /* 크기를 원래보다 1.05배 (5%) 키워라 */
-  transform: translateX(-50%) scale(1.05) !important;
-
-  /* 밝기를 원래보다 1.1배 (10%) 밝게 해라 */
-  filter: brightness(1.1) !important;
-
-  /* (선택사항) 마우스 커서를 손가락 모양으로 확실하게 변경 */
-  cursor: pointer !important;
 }
