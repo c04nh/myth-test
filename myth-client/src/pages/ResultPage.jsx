@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import bg from "../assets/image/background.png";
-import charAphrodite from "../assets/image/background.png";
+import charAphrodite from "../assets/image/Aphrodite.png";
 import charApollo from '../assets/image/Apollo.png';
 import charAres from '../assets/image/Ares.png';
 import charArtemis from '../assets/image/Artemis.png';
@@ -156,12 +156,14 @@ const ResultPage = () => {
             return;
         }
 
+        const currentUrl = window.location.origin;
+
         window.Kakao.Share.sendDefault({
             objectType: 'feed',
             content: {
                 title: `나의 신화 속 자아는? ${result.name}`,
                 description: result.desc,
-                imageUrl: 'https://via.placeholder.com/300', // 나중에 썸네일 이미지 주소를 넣으세요
+                imageUrl: currentUrl + '/icon.png',
                 link: {
                     mobileWebUrl: window.location.href,
                     webUrl: window.location.href,
